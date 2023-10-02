@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Actions\User\UpdateProfile;
+use App\Http\Managers\UserManager;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -28,5 +30,27 @@ class UserTest extends TestCase
        $user2 = User::find(3);
 
        $this->assertEquals(false, $user2->isAdmin());
+    }
+
+    public function test_if_update_profile_works(){
+
+
+        $userManager = new UserManager(new UpdateProfile);
+
+        $newVal = 'test';
+        $result = $userManager->updateProfile(['firstname'=>$newVal], 2);
+        $this->assertEquals($newVal,  $result);
+
+
+    }
+
+    public function test_if_validation_works(){
+
+        $userManager = new UserManager(new UpdateProfile);
+
+    
+        $result = $userManager->updateProfile(['firstname'=>null], 4);
+
+        $this->assertEquals(422,  $result);
     }
 }

@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('year_level');
             $table->integer('semester');
             $table->integer('number_of_units');
-            $table->bigInteger('user_id')->unsigned();
+
             $table->bigInteger('course_id')->unsigned()->nullable();
     
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+ 
              $table->foreign('course_id')->references('id')->on('courses');
 
 

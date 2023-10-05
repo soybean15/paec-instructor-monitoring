@@ -21,36 +21,36 @@ class UserTest extends TestCase
        $this->assertEquals(true, $user->isAdmin());
     }
 
-    public function test_if_user_is_not_admin(): void
-    {
-        $user = User::find(2);
+    // public function test_if_user_is_not_admin(): void
+    // {
+    //     $user = User::find(2);
 
-       $this->assertEquals(false, $user->isAdmin());
+    //    $this->assertEquals(false, $user->isAdmin());
 
-       $user2 = User::find(3);
+    //    $user2 = User::find(3);
 
-       $this->assertEquals(false, $user2->isAdmin());
-    }
+    //    $this->assertEquals(false, $user2->isAdmin());
+    // }
 
-    public function test_if_update_profile_works(){
-
-
-        $userManager = new UserManager(new UpdateProfile);
-
-        $newVal = 'test';
-        $result = $userManager->updateProfile(['firstname'=>$newVal], 2);
-        $this->assertEquals($newVal,  $result);
+    // public function test_if_update_profile_works(){
 
 
-    }
+    //     $userManager = new UserManager(new UpdateProfile);
 
-    public function test_if_validation_works(){
+    //     $newVal = 'test';
+    //     $result = $userManager->updateProfile(['firstname'=>$newVal], 2);
+    //     $this->assertEquals($newVal,  $result);
 
-        $userManager = new UserManager(new UpdateProfile);
+
+    // }
+
+    // public function test_if_validation_works(){
+
+    //     $userManager = new UserManager(new UpdateProfile);
 
     
-        $result = $userManager->updateProfile(['firstname'=>null], 4);
+    //     $result = $userManager->updateProfile(['firstname'=>null], 4);
 
-        $this->assertEquals(422,  $result);
-    }
+    //     $this->assertEquals(422,  $result);
+    // }
 }

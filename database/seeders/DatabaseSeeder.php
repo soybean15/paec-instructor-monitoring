@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'marlonpadilla1593@gmail.com',
         ]);
          \App\Models\User::factory(10)->create();
+         \App\Models\Subject::factory(30)->create();
 
 
     }

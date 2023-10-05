@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Managers\SubjectManager;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    //
+    
+
+    protected SubjectManager $manager;
+    public function __construct(SubjectManager $manager)
+    {
+        $this->manager = $manager;
+    }
+
+
     public function index(){
         $subjects = Subject::all();
 
@@ -15,4 +24,21 @@ class SubjectController extends Controller
             'subjects'=>$subjects
         ]);
     }
+
+    
+
+    public function store(Request $request ){
+
+    
+
+        // return response()->json([
+
+        //     'request'=>$request->all()
+        // ]);
+
+        $this->manager->store($request->all());
+
+    }
+
+   
 }

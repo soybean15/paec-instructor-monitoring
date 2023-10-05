@@ -25,7 +25,7 @@ class SubjectFactory extends Factory
             'year_level'=>rand(1,4),
             'semester'=>rand(1,2),
             'number_of_units'=>rand(1,5),
-            'user_id'=>1,
+          
             'course_id'=>null
     
         ];

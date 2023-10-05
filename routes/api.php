@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +53,16 @@ Route::prefix('admin')->middleware(['auth:sanctum','isAdmin'])->group(function()
 
     });
 
+
+    Route::prefix('course')->group(function(){
+
+         Route::get('/', [CourseController::class, 'index']);
+    });
+
+    Route::prefix('department')->group(function(){
+
+        Route::get('/', [DepartmentController::class, 'index']);
+   });
 
 
 

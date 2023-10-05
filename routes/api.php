@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,18 @@ Route::group(['middleware' => ['auth:sanctum']],function(){
 
 });
 
+
+//localhost:8000/api/admin/subject/
 Route::prefix('admin')->middleware(['auth:sanctum','isAdmin'])->group(function(){
 
+    Route::prefix('subject')->group(function(){
+
+
+        Route::get('/',[SubjectController::class,'index']);
+        Route::post('/store',[SubjectController::class,'store']);
+
+
+    });
 
 
 

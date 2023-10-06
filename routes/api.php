@@ -49,7 +49,7 @@ Route::prefix('admin')->middleware(['auth:sanctum','isAdmin'])->group(function()
 
         Route::get('/',[SubjectController::class,'index']);
         Route::post('/store',[SubjectController::class,'store']);
-
+        Route::post('/update',[SubjectController::class,'update']);
 
     });
 

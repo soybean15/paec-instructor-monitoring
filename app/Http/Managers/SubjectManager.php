@@ -1,24 +1,109 @@
 <?php
 
 namespace App\Http\Managers;
+
 use App\Actions\Academics\CreateSubject;
+use App\Models\Subject;
+use App\Traits\HasSubject;
+use Illuminate\Support\Facades\Validator;
 
-class SubjectManager{
+class SubjectManager
+{
+
+    use HasSubject;
 
 
 
+    function store($data)
+    {
 
-    function store ($data){
+
 
         $createSubject = new CreateSubject();
 
-        $subject =  $createSubject->execute($data);
+        $subject = $createSubject->execute($data);
 
         return response()->json([
-            'subject'=>$subject
+            'subject' => $subject
         ]);
 
     }
+
+
+
+
+    function update($data, $id)
+    {
+        $subject = Subject::find($id);
+
+
+
+        $attribute = $data['attribute'];
+        $newValue = $data['value'];
+
+        try {
+
+
+
+            $validator = Validator::make($data, [
+                'value' => $this->validate($attribute),
+            ]);
+
+            if ($validator->fails()) {
+
+                throw new \Exception($validator->errors(), 422);
+              
+            }
+
+            if ($subject) {
+
+
+
+                $subject[$attribute] = $newValue;
+
+                $subject->save();
+
+
+                return response()->json([
+                    'message' => 'Subject Updated Succesfully',
+                    'status' => 'success'
+
+                ]);
+
+            } else {
+
+                throw new \Exception("No Subject Found", 422);
+            }
+
+        } catch (\Exception $e) {
+            if ($e->getCode() == 422) {
+
+                $error = json_decode($e->getMessage(), true);
+                $errorMessage = $error['value'][0];
+
+
+                return response()->json([
+                    'message' => $errorMessage,
+                    'status' => 'failed'
+
+                ], $e->getCode());
+            }
+
+
+            return response()->json([
+                'message' => $e->getMessage(),
+                'status' => 'failed'
+            ], 404);
+
+        }
+
+
+
+
+
+    }
+
+
 
 
 }

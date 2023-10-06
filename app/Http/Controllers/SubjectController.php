@@ -40,5 +40,16 @@ class SubjectController extends Controller
 
     }
 
+    public function update(Request $request){
+
+
+        return $this->manager->update(
+            [
+                'attribute'=>$request['attribute'],
+                'value'=>$request['value']
+            ], 
+            $request['id']
+        );
+    }
    
 }

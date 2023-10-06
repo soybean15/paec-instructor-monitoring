@@ -63,6 +63,7 @@ Route::prefix('admin')->middleware(['auth:sanctum','isAdmin'])->group(function()
     Route::prefix('department')->group(function(){
 
         Route::get('/', [DepartmentController::class, 'index']);
+        Route::post('/store',[DepartmentController::class,'store']);
 
    });
 

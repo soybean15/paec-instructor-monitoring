@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class SubjectController extends Controller
 {
     
-
+ 
     protected SubjectManager $manager;
     public function __construct(SubjectManager $manager)
     {

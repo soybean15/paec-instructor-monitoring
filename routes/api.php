@@ -58,12 +58,14 @@ Route::prefix('admin')->middleware(['auth:sanctum','isAdmin'])->group(function()
 
          Route::get('/', [CourseController::class, 'index']);
          Route::post('/store',[CourseController::class,'store']);
+         Route::post('/update',[CourseController::class,'update']);
     });
 
     Route::prefix('department')->group(function(){
 
         Route::get('/', [DepartmentController::class, 'index']);
         Route::post('/store',[DepartmentController::class,'store']);
+        Route::post('/update',[DepartmentController::class,'update']);
 
    });
 

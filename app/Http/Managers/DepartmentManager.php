@@ -2,9 +2,14 @@
 
 namespace App\Http\Managers;
 use App\Actions\Academics\CreateDepartment;
+use App\Models\Department;
+use App\Traits\HasSubject;
+use Illuminate\Support\Facades\Validator;
 
-class DepartmentManager{
+class DepartmentManager
+{
 
+    use HasSubject;
     function store($data){
       
         $createDepartment = new CreateDepartment();
@@ -14,6 +19,78 @@ class DepartmentManager{
         return response()->json([
             'department' => $department
         ]);
+    }
+
+
+    function update($data, $id)
+    {
+        $department = Department::find($id);
+
+
+
+        $attribute = $data['attribute'];
+        $newValue = $data['value'];
+
+        try {
+
+
+
+            $validator = Validator::make($data, [
+                'value' => $this->validate($attribute),
+            ]);
+
+            if ($validator->fails()) {
+
+                throw new \Exception($validator->errors(), 422);
+              
+            }
+
+            if ($department) {
+
+
+
+                $department[$attribute] = $newValue;
+
+                $department->save();
+
+
+                return response()->json([
+                    'message' => 'Department Updated Succesfully',
+                    'status' => 'success'
+
+                ]);
+
+            } else {
+
+                throw new \Exception("No Department Found", 422);
+            }
+
+        } catch (\Exception $e) {
+            if ($e->getCode() == 422) {
+
+                $error = json_decode($e->getMessage(), true);
+                $errorMessage = $error['value'][0];
+
+
+                return response()->json([
+                    'message' => $errorMessage,
+                    'status' => 'failed'
+
+                ], $e->getCode());
+            }
+
+
+            return response()->json([
+                'message' => $e->getMessage(),
+                'status' => 'failed'
+            ], 404);
+
+        }
+
+
+
+
+
     }
 
 }

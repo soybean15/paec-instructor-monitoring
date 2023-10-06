@@ -28,4 +28,18 @@ class CourseController extends Controller
         $this->manager->store($request->all());
 
     }
+
+
+    public function update(Request $request){
+
+
+        return $this->manager->update(
+            [
+                'attribute'=>$request['attribute'],
+                'value'=>$request['value']
+            ], 
+            $request['id']
+        );
+    }
+   
 }

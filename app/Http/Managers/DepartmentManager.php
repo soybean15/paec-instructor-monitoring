@@ -87,10 +87,47 @@ class DepartmentManager
 
         }
 
+       }
 
 
+       public function destroy($id){
 
+
+        $department = Department::find($id);
+
+        try{
+
+            if(!$department){
+                throw new \Exception("Department not found", 404);
+            }
+
+            $department->delete();
+
+
+            return response()->json([
+
+                'message'=>'Department Successfully Deleted',
+                'status'=>'success'
+            ]);
+
+        }catch(\Exception $e){
+
+
+            return response()->json([
+
+                'message'=>$e->getMessage(),
+                'status'=>'failed'
+
+            ],$e->getCode());
+
+
+        }
 
     }
+
+
+
+
+   
 
 }

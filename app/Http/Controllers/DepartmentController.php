@@ -38,5 +38,10 @@ class DepartmentController extends Controller
             $request['id']
         );
     }
+
+
+    public function destroy(Request $request){
+        return $this->manager->destroy($request['id']);
+    }
 }
  

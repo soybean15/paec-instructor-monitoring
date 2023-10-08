@@ -104,6 +104,47 @@ class SubjectManager
     }
 
 
+    public function destroy($id){
+
+
+        $subject = Subject::find($id);
+
+        try{
+
+            if(!$subject){
+                throw new \Exception("Subject not found", 404);
+            }
+
+            $subject->delete();
+
+
+            return response()->json([
+
+                'message'=>'Subject Successfully Deleted',
+                'status'=>'success'
+            ]);
+
+        }catch(\Exception $e){
+
+
+            return response()->json([
+
+                'message'=>$e->getMessage(),
+                'status'=>'failed'
+
+            ],$e->getCode());
+
+
+        }
+
+
+
+
+
+
+    }
+
+
 
 
 }

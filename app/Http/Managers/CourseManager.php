@@ -89,10 +89,44 @@ class CourseManager{
             ], 404);
 
         }
+    }
+
+    public function destroy($id){
 
 
+        $course = Course::find($id);
+
+        try{
+
+            if(!$course){
+                throw new \Exception("Course not found", 404);
+            }
+
+            $course->delete();
 
 
+            return response()->json([
+
+                'message'=>'Course Successfully Deleted',
+                'status'=>'success'
+            ]);
+
+        }catch(\Exception $e){
+
+
+            return response()->json([
+
+                'message'=>$e->getMessage(),
+                'status'=>'failed'
+
+            ],$e->getCode());
+
+
+        }
 
     }
+   
+
+
+   
 }

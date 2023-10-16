@@ -20,6 +20,7 @@ class CreateSubject
             'year_level' => ['required'],
             'semester' => ['required'],
             'number_of_units'=> ['required'],
+
         ])->validate();
 
        return Subject::create([
@@ -27,6 +28,7 @@ class CreateSubject
             'description'=>$data['description'],
             'year_level' =>$data['year_level']['value'],
             'semester' => $data['semester']['value'],
+            'course_id'=>$data['course_id']['value'],
             'number_of_units'=> $data['number_of_units'],
         ]);
 

@@ -15,5 +15,11 @@ class Course extends Model
         'description',
        
     ];
+
+    public function subjects(){
+
+        return $this->hasMany(Subject::class);
+        
+    }
    
 }

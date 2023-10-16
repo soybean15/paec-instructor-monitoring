@@ -15,7 +15,7 @@ class CourseController extends Controller
     }
 
     public function index(){
-        $courses = Course::paginate(1);
+        $courses = Course::paginate(10);
 
         return response()-> json([
             'courses' => $courses

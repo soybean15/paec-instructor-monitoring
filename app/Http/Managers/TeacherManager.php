@@ -13,7 +13,7 @@ class TeacherManager{
 
     public function getPending(){
         return response()->json([
-            'pending'=>$this->pending
+            'pending'=>$this->pending()
         ]);
         
     }

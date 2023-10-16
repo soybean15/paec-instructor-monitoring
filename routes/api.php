@@ -3,6 +3,7 @@
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,11 @@ Route::prefix('admin')->middleware(['auth:sanctum','isAdmin'])->group(function()
         Route::post('/update',[DepartmentController::class,'update']);
         Route::post('/destroy',[DepartmentController::class,'destroy']);
 
+   });
+
+   Route::prefix('teacher')->group(function(){
+
+        Route::get('/pending',[TeacherController::class,'pending']);
    });
 
 

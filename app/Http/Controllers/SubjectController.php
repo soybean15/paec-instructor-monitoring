@@ -18,7 +18,7 @@ class SubjectController extends Controller
 
 
     public function index(){
-        $subjects = Subject::all();
+        $subjects = Subject::paginate(1);
 
         return response()->json([
             'subjects'=>$subjects

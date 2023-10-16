@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Http\Managers\UserManager;
+use App\Http\Managers\TeacherManager;
 use Illuminate\Support\ServiceProvider;
-
-class UserProvider extends ServiceProvider
+use App\Http\Managers\UserManager;
+class UserServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -16,6 +16,11 @@ class UserProvider extends ServiceProvider
 
         $this->app->bind(UserManager::class, function ($app) {
             return new UserManager($app->make(CreateNewEmployee::class));
+        });
+
+
+        $this->app->singleton(TeacherManager::class, function (Application $app){
+            return new TeacherManager();
         });
     }
 

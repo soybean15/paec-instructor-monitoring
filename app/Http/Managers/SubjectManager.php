@@ -141,5 +141,20 @@ class SubjectManager
 
 
 
+    public function search (String $val =''){
+
+        $subjects = Subject::where('name', 'LIKE', "$val%")->paginate(10);
+
+      
+        return response()->json([
+            'subjects'=>$subjects
+        ]); 
+
+
+    }
+
+
+
+
 
 }

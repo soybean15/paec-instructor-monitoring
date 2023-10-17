@@ -20,4 +20,23 @@ class UserProfile extends Model
         'address',
         'user_id'
     ];
+
+    protected $append= ['full_name'];
+
+    public function getFullNameAttribute(){
+
+     //   $middlename = strtoupper(($this->middlename[0] . '.')) ?? '';
+
+     $middlename = !empty($this->middlename) && trim($this->middlename) !== '' ? strtoupper($this->middlename[0] . '.') : '';
+
+
+
+        return $this->lastname .' ' . $this->firstname. ' '.$middlename;
+
+
+        
+
+
+
+    }
 }

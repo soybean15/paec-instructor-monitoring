@@ -19,7 +19,7 @@ class IsAdmin
         $user =  $request->user();
         
         if($user && !$user->isAdmin()){
-            abort(403, 'Unauthorized action request.');
+            abort(402, 'Admin Only access.');
         }
      
         return $next($request);

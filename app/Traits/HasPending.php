@@ -8,9 +8,8 @@ trait HasPending{
 
 
     public function pending(){
-        $pending = Teacher::pending()->get();
+        return Teacher::pending()->with('user.profile')->get();
 
-        return $pending;
       
     }
 }

@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 
-Route::group(['middleware' => ['auth:sanctum','verified']],function(){
+Route::group(['middleware' => ['auth:sanctum','verified','isProfileComplete']],function(){
 
     Route::prefix('/')->group(function(){
 

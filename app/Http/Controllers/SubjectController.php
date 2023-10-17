@@ -58,5 +58,12 @@ class SubjectController extends Controller
 
             return $this->manager->destroy($request['id']);
     }
+
+    public function search (Request $request){
+
+        return $this->manager->search($request['val']==null?'':$request['val']);
+
+      
+    }
    
 }

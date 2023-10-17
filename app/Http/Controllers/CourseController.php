@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Http\Managers\CourseManager;
+use App\Http\Managers\CourseManager; 
 
 class CourseController extends Controller
 {
@@ -47,5 +47,12 @@ class CourseController extends Controller
 
         return $this->manager->destroy($request['id']);
   }
+
+  public function search (Request $request){
+
+    return $this->manager->search($request['val']==null?'':$request['val']);
+
+  
+}
    
 }

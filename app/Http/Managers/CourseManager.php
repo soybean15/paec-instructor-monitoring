@@ -86,7 +86,7 @@ class CourseManager{
             return response()->json([
                 'message' => $e->getMessage(),
                 'status' => 'failed'
-            ], 404);
+            ], 404); 
 
         }
     }
@@ -123,6 +123,19 @@ class CourseManager{
 
 
         }
+
+    }
+
+
+    public function search (String $val =''){
+
+        $courses = Course::where('name', 'LIKE', "$val%")->paginate(10);
+
+      
+        return response()->json([
+            'courses'=>$courses
+        ]); 
+
 
     }
    

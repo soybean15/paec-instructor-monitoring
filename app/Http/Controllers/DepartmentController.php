@@ -43,5 +43,13 @@ class DepartmentController extends Controller
     public function destroy(Request $request){
         return $this->manager->destroy($request['id']);
     }
+
+
+    public function search (Request $request){
+
+        return $this->manager->search($request['val']==null?'':$request['val']);
+
+      
+    }
 }
  

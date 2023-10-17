@@ -126,6 +126,19 @@ class DepartmentManager
     }
 
 
+    public function search (String $val =''){
+
+        $departments = Department::where('name', 'LIKE', "$val%")->paginate(10);
+
+      
+        return response()->json([
+            'departments'=>$departments
+        ]); 
+
+
+    }
+
+
 
 
    

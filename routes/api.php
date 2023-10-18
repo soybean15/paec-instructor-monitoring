@@ -28,12 +28,13 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 
-Route::group(['middleware' => ['auth:sanctum','verified','isProfileComplete']],function(){
+Route::group(['middleware' => ['auth:sanctum','verified']],function(){
 
     Route::prefix('/')->group(function(){
 
         Route::get('profile',[UserController::class,'index']);
-        Route::get('is-admin',[UserController::class,'isAdmin']);
+        Route::get('is-admin',[UserController::class,'isAdmin'])->middleware('isProfileComplete');
+        Route::post('update/{id}',[UserController::class,'updateProfile']);
     });
 
    

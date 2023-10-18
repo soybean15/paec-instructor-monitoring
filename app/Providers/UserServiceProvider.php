@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Actions\User\UpdateProfile;
 use App\Http\Managers\TeacherManager;
+use Illuminate\Console\Application;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Managers\UserManager;
 class UserServiceProvider extends ServiceProvider
@@ -15,7 +17,7 @@ class UserServiceProvider extends ServiceProvider
         //
 
         $this->app->bind(UserManager::class, function ($app) {
-            return new UserManager($app->make(CreateNewEmployee::class));
+            return new UserManager($app->make(UpdateProfile::class));
         });
 
 

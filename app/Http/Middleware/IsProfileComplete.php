@@ -18,9 +18,14 @@ class IsProfileComplete
 
         $user = $request->user();
 
-        if ($user->profile->firstname !== null || trim($user->profile->firstname) !== '') {
+        if ($user->profile->firstname == null || trim($user->profile->firstname) == '') {
 
-            abort(400, 'Incomplete profile');
+          //  abort(400, 'Incomplete profile',['user'=>$user->profile]);
+
+          return response()->json([
+            'message'=> 'Incomplete profile',
+            'user'=>$user->profile
+          ],400);
           
         } 
         

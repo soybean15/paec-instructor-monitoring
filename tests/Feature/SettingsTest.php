@@ -38,4 +38,12 @@ class SettingsTest extends TestCase
         $this->assertEquals('NEUST Peñaranda Off Campus', $response);
 
     }
+    public function test_if_current_school_year_is_correct(){
+
+        $manager =new TeacherManager();
+
+        $response = $manager->currentSchoolYear();
+
+        $this->assertEquals('2023-2024', $response);
+    }
 }

@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('school_year');
             $table->string('start');
             $table->string('end');
-            $table->string('section');
-
+          
             $table->timestamps();
 
             $table->foreign('subject_id')->references('id')->on('subjects');

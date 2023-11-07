@@ -5,6 +5,7 @@ namespace App\Http\Managers;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Traits\HasCarbon;
+use App\Traits\HasSchoolYear;
 use App\Traits\HasSettings;
 
 
@@ -12,7 +13,7 @@ use App\Traits\HasSettings;
 class TeacherManager
 {
 
-    use HasCarbon,HasSettings;
+    use HasCarbon,HasSettings,HasSchoolYear;
 
 
 

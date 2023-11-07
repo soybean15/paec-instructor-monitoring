@@ -17,13 +17,24 @@ class TeacherController extends Controller
         $this->manager = $manager;
     }
 
+    public function index(){
+        return $this->manager->index();
+    }
+
 
 
     public function pending(){
 
         return $this->manager->getPending();
 
+    }
 
+    public function accept(String $id){
+        return $this->manager->accept($id);
+    }
+
+    public function reject(String $id){
+        return $this->manager->reject($id);
     }
 
 

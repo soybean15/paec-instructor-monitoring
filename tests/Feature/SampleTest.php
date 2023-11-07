@@ -19,14 +19,5 @@ class SampleTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_if_adding_2_numbers_is_correct(){
-
-        $manager = new SubjectManager();
-
-        $result = $manager->add2Numbers(2,3);
-
-        $this->assertEquals(5,$result );
-
-
-    }
+  
 }

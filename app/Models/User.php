@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Traits\UserTrait;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail{
         'name',
         'email',
         'password',
+        'rejected_at'
 
     ];
 
@@ -57,5 +59,19 @@ class User extends Authenticatable implements MustVerifyEmail{
 
     public function isAdmin(){
       return $this->roles->contains('name', 'admin');
+    } 
+    public function teacher(){
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function scopePending(Builder $query){
+         $query->whereNotNull('email_verified_at')
+         ->whereNull('rejected_at')
+         ->whereDoesntHave('teacher');
+    }
+
+    public function scopeTeachers(Builder $query){
+
+        $query->whereHas('teacher');
     }
 }

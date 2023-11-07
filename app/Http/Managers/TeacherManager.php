@@ -5,19 +5,27 @@ namespace App\Http\Managers;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Traits\HasCarbon;
+use App\Traits\HasSettings;
 
 
 
 class TeacherManager
 {
 
-    use HasCarbon;
+    use HasCarbon,HasSettings;
+
 
 
 
     public function index(){
 
-        
+
+        $teachers = User::teachers()->get();
+
+        $teachers->load(['profile']);
+        return response()->json($teachers);
+
+
 
     }
 

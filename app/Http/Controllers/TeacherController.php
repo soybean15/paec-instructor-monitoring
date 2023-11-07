@@ -17,6 +17,10 @@ class TeacherController extends Controller
         $this->manager = $manager;
     }
 
+    public function index(){
+        return $this->manager->index();
+    }
+
 
 
     public function pending(){

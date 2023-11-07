@@ -86,6 +86,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
             Route::post('/reject/{id}', [TeacherController::class, 'reject']);
         });
 
+        Route::get('/',[TeacherController::class,'index']);
+
     });
 
 

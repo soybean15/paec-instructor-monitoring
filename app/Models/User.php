@@ -69,4 +69,9 @@ class User extends Authenticatable implements MustVerifyEmail{
          ->whereNull('rejected_at')
          ->whereDoesntHave('teacher');
     }
+
+    public function scopeTeachers(Builder $query){
+
+        $query->whereHas('teacher');
+    }
 }

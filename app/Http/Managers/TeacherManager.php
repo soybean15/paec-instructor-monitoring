@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Managers;
-use App\Traits\HasPending;
+use App\Models\User;
+
 
 
 class TeacherManager{
@@ -9,11 +10,14 @@ class TeacherManager{
 
 
 
-    use HasPending;
+  
 
     public function getPending(){
+
+        $pending = User::pending()->get();
+
         return response()->json([
-            'pending'=>$this->pending()
+            'pending'=> $pending 
         ]);
         
     }

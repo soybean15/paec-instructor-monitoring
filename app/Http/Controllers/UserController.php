@@ -44,11 +44,11 @@ class UserController extends Controller
 
        return $this->manager->updateProfile($request->all(),$id);
 
-        return response()->json([
+        // return response()->json([
             
-            'request'=>$request->all(),
-            'id'=>$id
-        ]);
+        //     'request'=>$request->all(),
+        //     'id'=>$id
+        // ]);
 
     }
 }

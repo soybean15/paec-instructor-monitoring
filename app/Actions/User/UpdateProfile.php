@@ -2,6 +2,7 @@
 
 namespace App\Actions\User;
 use App\Models\User;
+use App\Rules\IsAdult;
 use Illuminate\Support\Facades\Validator;
 class UpdateProfile{
 
@@ -14,25 +15,28 @@ class UpdateProfile{
             'firstname' => ['required', 'string', 'max:255'],
             'lastname'=>['required', 'string', 'max:255'],
             'gender'=>['required'],
-            'birthdate' => ['required'],
-          
+            'birthdate' => ['required' ,new IsAdult()],
+         
            
         ])->validate();
+
+
+        //return response()->json($attributes);
         try {
 
          
     
-           // if ($user->validate($attributes)) {
+          
 
                 foreach ($attributes as $attribute => $value) {
                     $user->profile->update([$attribute => $value]);
                 }
 
-               // return $value;
+        
                 return response()->json([
                     'user' => $user
                 ]);
-         //   }
+       
 
         } catch (\Exception $e) {
                $errors = json_decode($e->getMessage(), true);

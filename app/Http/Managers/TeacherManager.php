@@ -16,6 +16,8 @@ class TeacherManager{
 
         $pending = User::pending()->get();
 
+        $pending->load(['profile']);
+
         return response()->json([
             'pending'=> $pending 
         ]);

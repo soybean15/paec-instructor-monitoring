@@ -21,7 +21,7 @@ class UserProfile extends Model
         'user_id'
     ];
 
-    protected $append= ['full_name'];
+    protected $appends= ['full_name'];
 
     public function getFullNameAttribute(){
 

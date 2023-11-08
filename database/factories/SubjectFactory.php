@@ -21,6 +21,7 @@ class SubjectFactory extends Factory
     {
         return [
             'name'=>fake()->jobTitle(),
+            'code'=>fake()->postcode(),
             'description'=>fake()->sentence(10),
             'year_level'=>rand(1,4),
             'semester'=>rand(1,2),

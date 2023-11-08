@@ -49,10 +49,7 @@ class UserFactory extends Factory
                 $user->roles()->attach(1);
             }
             $user->createEmptyProfile();
-            Teacher::create([
-                'user_id'=>$user->id,
-                
-            ]);
+            
 
         });
     }

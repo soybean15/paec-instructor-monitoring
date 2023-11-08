@@ -9,9 +9,10 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
 
         'name',
+        'code',
         'description',
         'year_level',
         'semester',
@@ -21,12 +22,33 @@ class Subject extends Model
 
     ];
 
-    public function course(){
-       return $this->belongsTo(Course::class);
+    protected $appends = ['courseName'];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function getCourseNameAttribute()
+    {
+
+
+        $roman = [
+            1 => 'I',
+            2 => 'I',
+            3 => 'I',
+            4 => 'IV'
+        ];
+
+        if ($this->course) {
+            return $this->course->name;
+        }
+
+
+        return 'General Education ' . $roman[$this->year_level];
     }
 
 
-   
 
 
 

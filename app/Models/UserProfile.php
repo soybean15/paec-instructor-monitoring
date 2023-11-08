@@ -31,7 +31,7 @@ class UserProfile extends Model
 
 
 
-        return $this->lastname .' ' . $this->firstname. ' '.$middlename;
+        return $this->lastname .', ' . $this->firstname. ' '.$middlename;
 
 
     }

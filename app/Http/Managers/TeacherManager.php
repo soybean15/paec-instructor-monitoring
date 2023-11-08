@@ -24,7 +24,7 @@ class TeacherManager
 
         $teachers = User::teachers()->get();
 
-        $teachers->load(['profile','teacher.department:name']);
+        $teachers->load(['profile','teacher.department']);
         return response()->json($teachers);
 
 

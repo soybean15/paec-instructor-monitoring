@@ -60,6 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail{
     public function isAdmin(){
       return $this->roles->contains('name', 'admin');
     } 
+
+    public function isTeacher(){
+        return $this->teacher !== null;
+    }
     public function teacher(){
         return $this->hasOne(Teacher::class);
     }
@@ -67,11 +71,18 @@ class User extends Authenticatable implements MustVerifyEmail{
     public function scopePending(Builder $query){
          $query->whereNotNull('email_verified_at')
          ->whereNull('rejected_at')
-         ->whereDoesntHave('teacher');
+         ->whereHas('teacher',function($query){
+            $query->where('status','pending');
+         });
     }
 
     public function scopeTeachers(Builder $query){
 
-        $query->whereHas('teacher');
+        $query->whereHas('teacher',function($query){
+
+            $query->where('status','active');
+        });
     }
+
+
 }

@@ -38,4 +38,15 @@ class TeacherController extends Controller
     }
 
 
+    public function store(Request $request){
+        return $this->manager->store($request->all());
+    }
+
+
+    public function getTeacher(String $id){
+        return    $this->manager->getTeacher($id);
+    }
+
+
+
 }

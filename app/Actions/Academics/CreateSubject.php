@@ -17,6 +17,7 @@ class CreateSubject
 
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'code'=>['required', 'string'],
             'year_level' => ['required'],
             'semester' => ['required'],
             'number_of_units'=> ['required'],
@@ -25,6 +26,7 @@ class CreateSubject
 
        return Subject::create([
             'name' =>$data['name'],
+            'code'=>$data['code'],
             'description'=>$data['description'],
             'year_level' =>$data['year_level']['value'],
             'semester' => $data['semester']['value'],

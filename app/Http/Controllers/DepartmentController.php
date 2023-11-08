@@ -14,12 +14,22 @@ class DepartmentController extends Controller
     }
 
     public function index(){
-        $departments = Department::paginate(1);
+        $departments = Department::paginate(5);
 
         return response()-> json([
             'departments' => $departments
         ]);
     }
+
+    public function getDepartments(){
+        $departments = Department::all();
+
+        return response()-> json([
+            'departments' => $departments
+        ]);
+    }
+
+
 
 
     public function store(Request $request){

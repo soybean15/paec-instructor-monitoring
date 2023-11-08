@@ -31,11 +31,13 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
+  
     Route::prefix('/')->group(function () {
-
+        Route::get('/departments', [DepartmentController::class, 'getDepartments']);
         Route::get('profile', [UserController::class, 'index']);
-        Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware('isProfileComplete');
+        Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware(['isProfileComplete','isTeacher']);
         Route::post('update/{id}', [UserController::class, 'updateProfile']);
+        Route::post('/teacher',[TeacherController::class,'store']);
     });
 
 
@@ -87,6 +89,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
         });
 
         Route::get('/',[TeacherController::class,'index']);
+        Route::get('/{id}',[TeacherController::class,'getTeacher']);
 
     });
 

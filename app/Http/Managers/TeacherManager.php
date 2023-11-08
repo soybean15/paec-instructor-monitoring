@@ -8,24 +8,50 @@ use App\Traits\HasCarbon;
 use App\Traits\HasSchoolYear;
 use App\Traits\HasSettings;
 
-
+use Illuminate\Support\Facades\Validator;
 
 class TeacherManager
 {
 
-    use HasCarbon,HasSettings,HasSchoolYear;
+    use HasCarbon, HasSettings, HasSchoolYear;
 
 
 
 
-    public function index(){
+    public function index()
+    {
 
 
         $teachers = User::teachers()->get();
 
-        $teachers->load(['profile']);
+        $teachers->load(['profile','teacher.department']);
         return response()->json($teachers);
 
+
+
+    }
+
+    public function getTeacher(String $id){
+        $teacher = User::find($id);
+
+        $teacher->load(['teacher.department','profile']);
+        return response()->json($teacher);
+
+
+    }
+
+
+
+    public function store($data)
+    {
+        Validator::make($data, [
+            'user_id' => ['required'],
+            'department_id' => ['required'],
+        ])->validate();
+
+        $teacher = Teacher::create($data);
+
+        return response()->json($teacher);
 
 
     }
@@ -48,12 +74,19 @@ class TeacherManager
     public function accept(string $id)
     {
 
-        Teacher::create([
-            'user_id' => $id
-        ]);
+        $user = User::where('id', $id)->first();
 
+        if ($user) {
+            $teacher = $user->teacher;
+            if ($teacher) {
+                $teacher->status = "active";
+                $teacher->save();
+            }
 
-        return response()->json(['message' => 'User Accepted']);
+            return response()->json(['message' => 'User Accepted']);
+        }
+
+        return response()->json(['message' => 'User not found'], 404);
 
 
     }

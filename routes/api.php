@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::prefix('/')->group(function () {
 
         Route::get('profile', [UserController::class, 'index']);
-        Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware('isProfileComplete');
+        Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware(['isProfileComplete','isTeacher']);
         Route::post('update/{id}', [UserController::class, 'updateProfile']);
     });
 

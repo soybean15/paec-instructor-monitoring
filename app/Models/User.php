@@ -60,6 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail{
     public function isAdmin(){
       return $this->roles->contains('name', 'admin');
     } 
+
+    public function isTeacher(){
+        return $this->teacher !== null;
+    }
     public function teacher(){
         return $this->hasOne(Teacher::class);
     }

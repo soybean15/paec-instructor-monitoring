@@ -43,6 +43,10 @@ class TeacherController extends Controller
     }
 
 
+    public function getTeacher(String $id){
+        return    $this->manager->getTeacher($id);
+    }
+
 
 
 }

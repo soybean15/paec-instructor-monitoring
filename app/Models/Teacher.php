@@ -25,6 +25,7 @@ class Teacher extends Model
         
     }
 
+ 
 
 
     public function scopePending(Builder $query){

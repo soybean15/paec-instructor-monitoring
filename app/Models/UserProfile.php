@@ -34,9 +34,13 @@ class UserProfile extends Model
         return $this->lastname .' ' . $this->firstname. ' '.$middlename;
 
 
-        
+    }
 
 
-
+    public function getImageAttribute($value){
+        if($value){
+            return asset('images/users/' . $value);
+        }
+        return asset('images/defaults/default_user.jpg');
     }
 }

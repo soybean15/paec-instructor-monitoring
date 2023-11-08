@@ -24,12 +24,22 @@ class TeacherManager
 
         $teachers = User::teachers()->get();
 
-        $teachers->load(['profile','teacher.department']);
+        $teachers->load(['profile','teacher.department:name']);
         return response()->json($teachers);
 
 
 
     }
+
+    public function getTeacher(String $id){
+        $teacher = User::find($id);
+
+        $teacher->load(['teacher.department','profile']);
+        return response()->json($teacher);
+
+
+    }
+
 
 
     public function store($data)

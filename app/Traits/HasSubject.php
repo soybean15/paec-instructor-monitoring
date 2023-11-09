@@ -30,4 +30,13 @@ trait HasSubject{
     }
 
 
+
+    public function addSubjects($data){
+        
+    }
+
+
+
+
+
 }

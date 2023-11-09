@@ -14,13 +14,20 @@ class UserTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_if_user_is_admin(): void
+    public function test_if_user_is_not_admin(): void
     {
         $user = User::find(1);
 
-       $this->assertEquals(true, $user->isAdmin());
+       $this->assertEquals(false, $user->isAdmin());
     }
 
+
+    public function test_if_user_is_admin(): void
+    {
+        $user = User::find(11);
+
+       $this->assertEquals(true, $user->isAdmin());
+    }
     // public function test_if_user_is_not_admin(): void
     // {
     //     $user = User::find(2);

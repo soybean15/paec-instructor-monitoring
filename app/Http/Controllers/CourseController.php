@@ -22,6 +22,14 @@ class CourseController extends Controller
         ]);
     }
 
+    public function getCourses(){
+        $courses = Course::all();
+
+        return response()-> json([
+            'courses' => $courses
+        ]);
+    }
+
 
     public function store(Request $request){
 

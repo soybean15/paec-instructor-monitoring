@@ -25,6 +25,13 @@ class SubjectController extends Controller
         ]);
     }
 
+    public function getSubjects(){
+        $subjects = Subject::all();
+
+        return response()->json([
+            'subjects'=>$subjects
+        ]);
+    }
     
 
     public function store(Request $request ){

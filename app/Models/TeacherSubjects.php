@@ -2,10 +2,31 @@
 
 namespace App\Models;
 
+use App\Traits\HasSchoolYear;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TeacherSubjects extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSchoolYear;
+
+
+
+
+    public function teacher(){
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function subject(){
+        return $this->belongsTo(Subject::class);    
+    }
+
+    public function scopeCurrentSubject(Builder $query){
+
+        $query->where('year_level',$this->getSetting('year_level'))
+        ->where('semester', $this->getSetting('semester'));
+
+    }
 }

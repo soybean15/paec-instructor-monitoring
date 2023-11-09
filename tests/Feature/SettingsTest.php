@@ -46,4 +46,12 @@ class SettingsTest extends TestCase
 
         $this->assertEquals('2023-2024', $response);
     }
+
+    public function test_id_current_semester_is_correct(){
+        $manager =new TeacherManager();
+
+        $response = $manager->currentSemester();
+
+        $this->assertEquals(1, $response);
+    }
 }

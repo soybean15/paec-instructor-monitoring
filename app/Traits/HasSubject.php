@@ -33,17 +33,20 @@ trait HasSubject{
 
 
 
-   public function availableSubjects($teacher_id){
+   public function availableSubjects($teacher_id,$course_id=null){ 
 
      $teacher = Teacher::find($teacher_id);
 
      $teacherSubjects = $teacher->subjects->pluck('subject_id');
 
-     $subjects = Subject::whereNotIn('id', $teacherSubjects)->get();
+     $subjects = Subject::whereNotIn('id', $teacherSubjects)
+        ->where('course_id', $course_id)
+     ->get();
 
      return response()->json([
         'subjects'=>$subjects,
-        'ids'=>$teacherSubjects
+        'ids'=>$teacherSubjects,
+        'course_id'=>$course_id
      ]);
     
    }

@@ -66,6 +66,10 @@ class TeacherController extends Controller
         
     }
 
+    public function filterAvailableSubjectsByCourse(Request $request){
+        return $this->manager->availableSubjects($request['teacher_id'],$request['course_id']);
+    }
+
 
 
 }

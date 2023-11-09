@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 trait HasSchoolYear{
     use HasSettings;
 
+    protected $semester=1;
 
 
 
@@ -18,6 +19,7 @@ trait HasSchoolYear{
 
         if ($currentMonth >= $schoolYearStart) {
            
+            $this->semester = 1;
             $currentYear = $now->format('Y');
             $nextYear = $currentYear + 1;
             return $currentYear . '-' . $nextYear;
@@ -25,13 +27,16 @@ trait HasSchoolYear{
            
             $currentYear = $now->format('Y');
             $previousYear = $currentYear - 1;
+            $this->semester = 2;
             return $previousYear . '-' . $currentYear;
         }
         
 
     }
 
-    public function semester(){
 
+
+    public function currentSemester(){
+        return $this->semester;
     }
 }

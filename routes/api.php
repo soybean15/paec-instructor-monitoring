@@ -53,6 +53,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
 
 
         Route::get('/', [SubjectController::class, 'index']);
+        Route::get('/all', [SubjectController::class, 'getSubjects']);
         Route::post('/store', [SubjectController::class, 'store']);
         Route::post('/update', [SubjectController::class, 'update']);
         Route::post('/destroy', [SubjectController::class, 'destroy']);
@@ -63,6 +64,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
     Route::prefix('course')->group(function () {
 
         Route::get('/', [CourseController::class, 'index']);
+        Route::get('/all', [CourseController::class, 'getCourses']);
         Route::post('/store', [CourseController::class, 'store']);
         Route::post('/update', [CourseController::class, 'update']);
         Route::post('/destroy', [CourseController::class, 'destroy']);
@@ -90,6 +92,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
 
         Route::get('/',[TeacherController::class,'index']);
         Route::get('/{id}',[TeacherController::class,'getTeacher']);
+        Route::post('/subjects/{id}',[TeacherController::class,'insertSubjects']);
+        Route::get('/available-subjects/{id}',[TeacherController::class,'getAvailableSubjects']);
+        Route::post('/available-subjects',[TeacherController::class,'filterAvailableSubjectsByCourse']);
 
     });
 

@@ -153,6 +153,12 @@ class SubjectManager
 
     }
 
+    public function filterByCourse($id){
+
+        $subjects = Subject::where('cou', $id)->get();
+
+    }
+
 
 
 

@@ -12,6 +12,14 @@ class TeacherSubjects extends Model
 {
     use HasFactory, HasSchoolYear;
 
+    protected $fillable = [
+        'teacher_id',
+        'subject_id',
+        'school_year',
+        'semester'
+    ];
+
+
 
 
 
@@ -23,10 +31,14 @@ class TeacherSubjects extends Model
         return $this->belongsTo(Subject::class);    
     }
 
+   
+
     public function scopeCurrentSubject(Builder $query){
 
         $query->where('year_level',$this->getSetting('year_level'))
         ->where('semester', $this->getSetting('semester'));
 
     }
+
+  
 }

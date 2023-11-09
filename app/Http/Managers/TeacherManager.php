@@ -3,17 +3,20 @@
 namespace App\Http\Managers;
 
 use App\Models\Teacher;
+use App\Models\TeacherSubjects;
 use App\Models\User;
 use App\Traits\HasCarbon;
 use App\Traits\HasSchoolYear;
 use App\Traits\HasSettings;
+use App\Traits\HasSubject;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
 
 class TeacherManager
 {
 
-    use HasCarbon, HasSettings, HasSchoolYear;
+    use HasCarbon, HasSettings, HasSchoolYear, HasSubject;
 
 
 
@@ -34,7 +37,7 @@ class TeacherManager
     public function getTeacher(String $id){
         $teacher = User::find($id);
 
-        $teacher->load(['teacher.department','profile']);
+        $teacher->load(['teacher.department','profile','teacher.subjects']);
         return response()->json($teacher);
 
 
@@ -105,6 +108,32 @@ class TeacherManager
         );
     }
 
+    public function insertSubjects($subjects, $id)
+    {
+        try {
+            DB::transaction(function () use ($subjects, $id) {
+                foreach ($subjects as $subject) {
+                    TeacherSubjects::create([
+                        'teacher_id' => $id,
+                        'subject_id' => $subject['id'],
+                        'school_year' => $this->currentSchoolYear(),
+                        'semester' => $this->currentSemester(),
+                    ]);
+                }
+            });
+    
+            return response()->json([
+                'message' => 'Subjects Added'
+            ]);
+        } catch (\Exception $e) {
+            // Handle the exception, log it, or return an error response
+            return response()->json([
+                'message' => 'Failed to add subjects',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    
 
 
 

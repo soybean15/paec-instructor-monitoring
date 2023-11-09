@@ -47,13 +47,23 @@ class TeacherController extends Controller
         return    $this->manager->getTeacher($id);
     }
 
-    public function addSubjects(String $id, Request $request){
+    public function insertSubjects(String $id, Request $request){
+
+        // return response()->json([
+        //     'request'=>$request->subjects,
+        //     'id'=>$id
+        // ]);
+        return $this->manager->insertSubjects($request->subjects,$id);
 
 
-        return response()->json([
-            'request'=>$request->all(),
-            'id'=>$id
-        ]);
+      
+    }
+
+    public function getAvailableSubjects(String $id){
+
+        return $this->manager->availableSubjects($id);
+
+        
     }
 
 

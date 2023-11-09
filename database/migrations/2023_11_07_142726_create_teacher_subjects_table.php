@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('teacher_id');
             $table->bigInteger('subject_id');
-            $table->string('year_level');
-            $table->string('section');
+            $table->string('school_year');
             $table->integer('semester');
-            $table->bigInteger('course_id');
             $table->timestamps();
         });
     }

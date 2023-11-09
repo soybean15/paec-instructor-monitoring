@@ -92,7 +92,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
 
         Route::get('/',[TeacherController::class,'index']);
         Route::get('/{id}',[TeacherController::class,'getTeacher']);
-        Route::post('/subjects',[TeacherController::class,'addSubjects']);
+        Route::post('/subjects/{id}',[TeacherController::class,'insertSubjects']);
+        Route::get('/available-subjects/{id}',[TeacherController::class,'getAvailableSubjects']);
 
     });
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Traits; 
+namespace App\Traits;
+use App\Models\Subject;
+use App\Models\Teacher; 
 trait HasSubject{
 
 
@@ -31,9 +33,20 @@ trait HasSubject{
 
 
 
-    public function addSubjects($data){
-        
-    }
+   public function availableSubjects($teacher_id){
+
+     $teacher = Teacher::find($teacher_id);
+
+     $teacherSubjects = $teacher->subjects->pluck('subject_id');
+
+     $subjects = Subject::whereNotIn('id', $teacherSubjects)->get();
+
+     return response()->json([
+        'subjects'=>$subjects,
+        'ids'=>$teacherSubjects
+     ]);
+    
+   }
 
 
 

@@ -21,6 +21,7 @@ class TeacherSubjects extends Model
 
 
 
+    protected $appends=['subject_name'];
 
 
     public function teacher(){
@@ -38,6 +39,13 @@ class TeacherSubjects extends Model
         $query->where('year_level',$this->getSetting('year_level'))
         ->where('semester', $this->getSetting('semester'));
 
+    }
+
+
+    public function getSubjectNameAttribute(){
+       
+            return $this->subject->name;
+       
     }
 
   

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('subject_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('school_year');
+            $table->bigInteger('teacher_subject_id')->unsigned();
+            $table->int('day');
             $table->string('start');
             $table->string('end');
-          
+            $table->string('section')->nullable();
+            $table->string('room')->nullable();
             $table->timestamps();
 
             $table->foreign('subject_id')->references('id')->on('subjects');

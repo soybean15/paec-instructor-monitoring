@@ -38,7 +38,13 @@ class TeacherManager
         $teacher = User::find($id);
 
         $teacher->load(['teacher.department','profile','teacher.subjects']);
-        return response()->json($teacher);
+        return response()->json(
+            [
+                'teacher'=>$teacher,
+                'current_school_year'=>$this->currentSchoolYear(),
+                'current_semester'=>$this->currentSemester()
+            ]
+        );
 
 
     }

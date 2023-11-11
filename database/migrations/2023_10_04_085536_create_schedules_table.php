@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('teacher_subject_id')->unsigned();
-            $table->int('day');
+            $table->integer('day');
             $table->string('start');
             $table->string('end');
             $table->string('section')->nullable();
             $table->string('room')->nullable();
             $table->timestamps();
 
-            $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('teacher_subject_id')->references('id')->on('teacher_subjects');
+
         });
     }
 

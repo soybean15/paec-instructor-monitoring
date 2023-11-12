@@ -10,15 +10,7 @@ trait HasSchedule{
 
     
 
-    protected $fillable = [
-        'teacher_subject_id',
-        'day',
-        'start',
-        'end',
-        'section',
-        'room'
 
-    ];
     public function addSchedule($data){
 
 

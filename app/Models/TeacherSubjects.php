@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasSchedule;
 use App\Traits\HasSchoolYear;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TeacherSubjects extends Model
 {
-    use HasFactory, HasSchoolYear;
+    use HasFactory, HasSchoolYear,HasSchedule;
 
     protected $fillable = [
         'teacher_id',

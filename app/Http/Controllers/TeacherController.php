@@ -71,5 +71,9 @@ class TeacherController extends Controller
     }
 
 
+    public function addSchedule(Request $request){
+        return $this->manager->addSchedule($request['data'],$request['id']);
+    }
+
 
 }

@@ -37,7 +37,9 @@ class TeacherManager
     public function getTeacher(String $id){
         $teacher = User::find($id);
 
-        $teacher->load(['teacher.department','profile','teacher.subjects']);
+        $teacher->load(['teacher.department','profile']);
+
+        
         return response()->json(
             [
                 'teacher'=>$teacher,
@@ -48,8 +50,6 @@ class TeacherManager
 
 
     }
-
-
 
     public function store($data)
     {
@@ -72,8 +72,11 @@ class TeacherManager
 
         $pending = User::pending()->get();
 
-        $pending->load(['profile']);
+        if($pending){
+            $pending->load(['profile']);
 
+        }
+       
         return response()->json([
             'pending' => $pending
         ]);
@@ -140,6 +143,14 @@ class TeacherManager
         }
     }
     
+
+    public function addSchedule(String $id, $data){
+        $teacherSubject = TeacherSubjects::find($id);
+
+        return $teacherSubject->addSchedule($data);
+
+       
+    }
 
 
 

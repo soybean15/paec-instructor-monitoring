@@ -15,6 +15,7 @@ class Teacher extends Model
     protected $fillable = ['user_id','department_id'];
 
 
+    protected $appends=['current_subjects'];
     public function user(){
 
         return $this->belongsTo(User::class);
@@ -37,6 +38,11 @@ class Teacher extends Model
     public function subjects(){
        
         return $this->hasMany(TeacherSubjects::class);
+    }
+
+    public function getCurrentSubjectsAttribute()
+    {
+        return $this->subjects()->currentSubject()->get();
     }
 
     // public function availableSubjects(){

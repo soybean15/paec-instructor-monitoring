@@ -33,13 +33,13 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
-  
+
     Route::prefix('/')->group(function () {
         Route::get('/departments', [DepartmentController::class, 'getDepartments']);
         Route::get('profile', [UserController::class, 'index']);
-        Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware(['isProfileComplete','isTeacher']);
+        Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware(['isProfileComplete', 'isTeacher']);
         Route::post('update/{id}', [UserController::class, 'updateProfile']);
-        Route::post('/teacher',[TeacherController::class,'store']);
+        Route::post('/teacher', [TeacherController::class, 'store']);
     });
 
 
@@ -84,7 +84,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
     });
 
     Route::prefix('teacher')->group(function () {
-
+        Route::get('/', [TeacherController::class, 'index']);
 
         Route::prefix('pending')->group(function () {
             Route::get('/', [TeacherController::class, 'pending']);
@@ -92,11 +92,20 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
             Route::post('/reject/{id}', [TeacherController::class, 'reject']);
         });
 
-        Route::get('/',[TeacherController::class,'index']);
-        Route::get('/{id}',[TeacherController::class,'getTeacher']);
-        Route::post('/subjects/{id}',[TeacherController::class,'insertSubjects']);
-        Route::get('/available-subjects/{id}',[TeacherController::class,'getAvailableSubjects']);
-        Route::post('/available-subjects',[TeacherController::class,'filterAvailableSubjectsByCourse']);
+
+      
+
+        Route::prefix('subject')->group(function () {
+            Route::post('schedule', [TeacherController::class,'addSchedule']);
+            Route::post('/{id}', [TeacherController::class, 'insertSubjects']);
+            Route::get('/available/{id}', [TeacherController::class, 'getAvailableSubjects']);
+            Route::post('/available', [TeacherController::class, 'filterAvailableSubjectsByCourse']); //add subjects
+          
+        });
+
+         
+        Route::get('/{id}', [TeacherController::class, 'getTeacher']);
+
 
     });
 

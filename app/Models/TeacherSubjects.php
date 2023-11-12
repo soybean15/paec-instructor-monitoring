@@ -37,8 +37,8 @@ class TeacherSubjects extends Model
 
     public function scopeCurrentSubject(Builder $query){
 
-        $query->where('year_level',$this->getSetting('year_level'))
-        ->where('semester', $this->getSetting('semester'));
+        $query->where('school_year',$this->currentSchoolYear())
+        ->where('semester', $this->currentSemester());
 
     }
 

@@ -37,7 +37,9 @@ class TeacherManager
     public function getTeacher(String $id){
         $teacher = User::find($id);
 
-        $teacher->load(['teacher.department','profile','teacher.subjects']);
+        $teacher->load(['teacher.department','profile']);
+
+        
         return response()->json(
             [
                 'teacher'=>$teacher,

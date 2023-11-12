@@ -42,6 +42,10 @@ class TeacherSubjects extends Model
 
     }
 
+    public function schedules(){
+        return $this->hasMany(Schedule::class, 'teacher_subject_id');
+    }
+
 
     public function getSubjectNameAttribute(){
        

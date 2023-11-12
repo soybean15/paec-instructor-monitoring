@@ -147,9 +147,9 @@ class TeacherManager
     public function addSchedule(String $id, $data){
         $teacherSubject = TeacherSubjects::find($id);
 
-        $schedule =  $teacherSubject->addSchedule($data);
+        return $teacherSubject->addSchedule($data);
 
-        return response()->json($schedule);
+       
     }
 
 

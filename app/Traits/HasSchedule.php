@@ -15,7 +15,7 @@ trait HasSchedule{
 
 
         Validator::make($data, [
-            'teacher_subject_id' => ['required'],
+           
             'day' => ['required'],
             'start' => ['required', 'date_format:H:i'],
             'end' => ['required', 'date_format:H:i', 'after:start'],
@@ -25,7 +25,14 @@ trait HasSchedule{
 
        
 
-        return  Schedule::create($data);
+        return  Schedule::create([
+            'teacher_subject_id'=>$this->id,
+            'day'=> $data['day'],
+            'start' => $data['start'],  
+            'end'=> $data['end'],
+            'section'=> $data['section'],
+            'room'=> $data['room'],
+        ]);
 
     }
 }

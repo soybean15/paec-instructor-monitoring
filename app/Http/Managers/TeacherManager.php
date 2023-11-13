@@ -152,6 +152,15 @@ class TeacherManager
        
     }
 
+    public function getSchedules($teacher_id){
+
+        $teacher =  TeacherSubjects::where('teacher_id',$teacher_id)->first();
+
+        return $teacher->getSchedules();
+
+
+    }
+
 
 
 

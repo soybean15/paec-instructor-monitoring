@@ -78,10 +78,10 @@ trait HasSchedule
         }
     }
 
-    public function getSchedules(){
+    public  function getSchedules(){
 
         $agendas = [];
-        $teacherSubjects = TeacherSubjects::where('semester', $this->currentSemester())
+       TeacherSubjects::where('semester', $this->currentSemester())
         ->where('school_year', $this->currentSchoolYear())
         ->where('teacher_id', $this->teacher_id)
         ->with('schedules')
@@ -93,6 +93,7 @@ trait HasSchedule
                 if (!isset($agendas[$day])) {
                     $agendas[$day] = [];
                 }
+                $schedule->subject = $item->subject;
                 $agendas[$day][] = $schedule;
             }
 

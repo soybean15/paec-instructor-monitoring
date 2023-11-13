@@ -1,12 +1,14 @@
 <?php
+use App\Http\Managers\TeacherManager;
 use App\Models\TeacherSubjects;
+
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::get('/{id}',function($id){
-    $teacherSubject = TeacherSubjects::find($id);
+   $manager = new TeacherManager();
 
-    return $teacherSubject->getSchedules();
-
+   return $manager->getSchedules($id);
+   
 });

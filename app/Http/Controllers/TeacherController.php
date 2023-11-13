@@ -77,5 +77,10 @@ class TeacherController extends Controller
       return response()->json($request);
     }
 
+    public function getSchedules(String $teacher_id){
+
+        return $this->manager->getSchedules($teacher_id);
+
+    }
 
 }

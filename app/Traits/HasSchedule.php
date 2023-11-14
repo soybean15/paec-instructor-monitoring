@@ -104,8 +104,9 @@ trait HasSchedule
         return $agendas;
         
 
-
-
     }
+
+
+ 
 
 }

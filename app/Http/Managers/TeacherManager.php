@@ -166,7 +166,11 @@ class TeacherManager
 
         $teacherSubject = TeacherSubjects::find($teacher_subject_id);
 
-        return $teacherSubject->schedules;
+
+
+
+        
+        return response()->json($teacherSubject->schedules);
 
     }
 

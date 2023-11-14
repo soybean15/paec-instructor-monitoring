@@ -83,4 +83,11 @@ class TeacherController extends Controller
 
     }
 
+    public function getSubjectSchedules(String $teacher_subject_id){
+        
+        return $this->manager->getSubjectSchedules($teacher_subject_id);
+
+    }
+
+
 }

@@ -12,3 +12,10 @@ Route::get('/{id}',function($id){
    return $manager->getSchedules($id);
    
 });
+
+Route::get('/subject-schedules/{id}',function($id){
+   
+   $manager = new TeacherManager();
+   return $manager->getSubjectSchedules($id);
+
+});

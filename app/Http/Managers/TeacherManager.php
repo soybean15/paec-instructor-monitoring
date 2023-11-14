@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class TeacherManager
 {
 
-    use HasCarbon, HasSettings, HasSchoolYear, HasSubject;
+    use HasCarbon, HasSettings, HasSchoolYear, HasSubject,HasCarbon;
 
 
 
@@ -154,16 +154,36 @@ class TeacherManager
 
     public function getSchedules($teacher_id){
 
-        $teacher =  TeacherSubjects::where('teacher_id',$teacher_id)->first();
+        try{
+            $teacher =  TeacherSubjects::where('teacher_id',$teacher_id)->first();
 
-        return $teacher->getSchedules();
+            if($teacher){
+                return $teacher->getSchedules();
+    
+            }
 
+         
+    
+        }catch(\Exception $e){
 
+        }
+
+       
     }
 
+    public function getTodaySchedule($teacher_id){
+        $teacher =  TeacherSubjects::where('teacher_id',$teacher_id)->first();
+
+        if($teacher){
+            return $teacher->getTodaySchedules();
+
+        }
+
+    }
     public function getSubjectSchedules($teacher_subject_id){
 
 
+        
         $teacherSubject = TeacherSubjects::find($teacher_subject_id);
 
 

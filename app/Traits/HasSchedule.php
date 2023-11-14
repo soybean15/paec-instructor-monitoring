@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 trait HasSchedule
 {
 
-    use HasSchoolYear;
+    use HasSchoolYear,HasCarbon;
 
 
 
@@ -98,11 +98,40 @@ trait HasSchedule
             }
 
         });
-
-
-
         return $agendas;
         
+
+    }
+
+    public function getTodaySchedules(){
+
+
+
+        $now = $this->getNow();
+
+        $todaySchedules =[];
+
+
+       $dayOfWeek = $now->dayOfWeek;
+
+       $schedule =  TeacherSubjects::where('semester', $this->currentSemester())
+        ->where('school_year', $this->currentSchoolYear())
+        ->where('teacher_id', $this->teacher_id)
+        ->with('schedules')
+        ->get()
+        ->each(function($item) use(&$todaySchedules, &$dayOfWeek){
+
+
+            foreach($item->schedules as $schedule){
+
+                if($schedule->day == $dayOfWeek){
+                    $todaySchedules[]=$schedule;
+                }
+            }
+
+        });
+
+        return  $todaySchedules;
 
     }
 

@@ -89,6 +89,12 @@ class TeacherController extends Controller
 
     }
 
+    public function getTodaySchedules(String $id){
+
+        return $this->manager->getTodaySchedule($id);
+
+    }
+
     
 
 

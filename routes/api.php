@@ -90,6 +90,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
             Route::get('/', [TeacherController::class, 'pending']);
             Route::post('/accept/{id}', [TeacherController::class, 'accept']);
             Route::post('/reject/{id}', [TeacherController::class, 'reject']);
+
         });
 
 
@@ -105,7 +106,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
         });
 
 
-        Route::get('schedules/{id}', [TeacherController::class,'getSchedules']); 
+        Route::get('schedules/{id}', [TeacherController::class,'getSchedules']);
+        Route::get('schedule-today/{id}',[TeacherController::class,'']) 
         Route::get('/{id}', [TeacherController::class, 'getTeacher']);
 
 

@@ -107,7 +107,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
 
 
         Route::get('schedules/{id}', [TeacherController::class,'getSchedules']);
-        Route::get('schedule-today/{id}',[TeacherController::class,'']) 
+        Route::get('schedule-today/{id}',[TeacherController::class,'getTodaySchedules']) ;
         Route::get('/{id}', [TeacherController::class, 'getTeacher']);
 
 

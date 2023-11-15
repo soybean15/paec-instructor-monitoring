@@ -114,7 +114,8 @@ trait HasSchedule
 
        $dayOfWeek = $now->dayOfWeek;
 
-       $schedule =  TeacherSubjects::where('semester', $this->currentSemester())
+         TeacherSubjects::where('semester', $this->currentSemester())
+
         ->where('school_year', $this->currentSchoolYear())
         ->where('teacher_id', $this->teacher_id)
         ->with('schedules')
@@ -123,7 +124,7 @@ trait HasSchedule
 
 
             foreach($item->schedules as $schedule){
-
+                $schedule->subject_name = $item->subject->name;
                 if($schedule->day == $dayOfWeek){
                     $todaySchedules[]=$schedule;
                 }

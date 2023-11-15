@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index(Request $request){
 
         $user = $request->user();
-        $user->load(['profile']);
+        $user->load(['profile','teacher']);
         return response()->json([
 
 
@@ -50,6 +50,15 @@ class UserController extends Controller
         //     'id'=>$id
         // ]);
 
+    }
+
+
+    public function getClasses(String $id){
+        return $this->manager->getClasses($id);
+    }
+
+    public function getSchedules(String $id){
+        return $this->manager->getUserSchedules($id);
     }
 
 

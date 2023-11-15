@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::get('is-admin', [UserController::class, 'isAdmin'])->middleware(['isProfileComplete', 'isTeacher']);
         Route::post('update/{id}', [UserController::class, 'updateProfile']);
         Route::post('/teacher', [TeacherController::class, 'store']);
+        Route::get('classes/{id}',[UserController::class,'getClasses']);
+        Route::get('schedules/{id}',[TeacherController::class,'getSchedules']);
     });
 
 

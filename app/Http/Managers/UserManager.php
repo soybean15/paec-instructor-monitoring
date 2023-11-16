@@ -40,6 +40,15 @@ class UserManager
 
         }
         
+    }
+
+
+    public function getSubjectSchedules($teacher_subject_id){
+    
+        $teacherSubject = TeacherSubjects::find($teacher_subject_id);
+
+
+        return response()->json($teacherSubject->schedules);
 
     }
 

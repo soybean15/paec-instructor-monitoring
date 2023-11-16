@@ -61,5 +61,9 @@ class UserController extends Controller
         return $this->manager->getUserSchedules($id);
     }
 
+    public function getSubjectSchedules(String $id){
+        return $this->manager->getSubjectSchedules($id);
+
+    }
 
 }

@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::post('/teacher', [TeacherController::class, 'store']);
         Route::get('classes/{id}',[UserController::class,'getClasses']);
         Route::get('schedules/{id}',[TeacherController::class,'getSchedules']);
+        Route::get('subject/schedule/{id}',[TeacherController::class,'getSubjectSchedules']);
     });
 
 

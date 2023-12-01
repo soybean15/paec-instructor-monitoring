@@ -3,6 +3,7 @@
 namespace App\Http\Managers;
 use App\Actions\User\UpdateProfile;
 use App\Models\TeacherSubjects;
+use App\Models\User;
 
 
 class UserManager
@@ -49,6 +50,21 @@ class UserManager
 
 
         return response()->json($teacherSubject->schedules);
+
+    }
+
+    public function upload($id,$file){
+
+        $user = User::find($id);
+
+        if($file){
+            $user->profile->restoreImage('images/users', $file);
+        }
+
+        return response()->json([
+            'image' =>$user->profile->image 
+        ]);
+
 
     }
 

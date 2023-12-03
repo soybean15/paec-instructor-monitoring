@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
@@ -54,6 +55,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 //localhost:8000/api/admin/subject/
 Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+
+
+    Route::get('dashboard',[DashboardController::class,'index']);
 
     Route::prefix('subject')->group(function () {
 

@@ -55,7 +55,7 @@ class TeacherManager
     {
         Validator::make($data, [
             'user_id' => ['required'],
-            'department_id' => ['required'],
+         
         ])->validate();
 
         $teacher = Teacher::create($data);

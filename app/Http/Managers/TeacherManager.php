@@ -132,7 +132,8 @@ class TeacherManager
             });
     
             return response()->json([
-                'message' => 'Subjects Added'
+                'message' => 'Subjects Added',
+                'subjects'=>$subjects
             ]);
         } catch (\Exception $e) {
             // Handle the exception, log it, or return an error response

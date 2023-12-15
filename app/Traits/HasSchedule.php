@@ -14,6 +14,16 @@ trait HasSchedule
 
 
 
+    public function testAddSchedule(){
+        $schedules = TeacherSubjects::where('semester', $this->currentSemester())
+        ->where('school_year', $this->currentSchoolYear())
+        ->where('id',$this->id)
+        ->with('schedules')
+        ->first();
+
+        return $schedules;
+    }
+
     public function addSchedule($data)
     {
         Validator::make($data, [
@@ -24,11 +34,11 @@ trait HasSchedule
 
         try {
             $schedules = TeacherSubjects::where('semester', $this->currentSemester())
-                ->where('school_year', $this->currentSchoolYear())
-                ->where('teacher_id', $this->teacher_id)
-                ->with('schedules')
-                ->first();
-
+            ->where('school_year', $this->currentSchoolYear())
+            ->where('id',$this->id)
+            ->with('schedules')
+            ->first();
+            
             $existingSchedules = $schedules->schedules;
 
             // Check for overlap with existing schedules

@@ -185,9 +185,16 @@ class TeacherManager
     
         $teacherSubject = TeacherSubjects::find($teacher_subject_id);
 
+        if($teacherSubject->schedules){
+            return response()->json($teacherSubject->schedules);
 
-        return response()->json($teacherSubject->schedules);
+        }
 
+        
+
+
+
+       
     }
 
 

@@ -57,7 +57,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function () {
 
 
-    Route::get('dashboard',[DashboardController::class,'index']);
+  
+
+    Route::prefix('dashboard')->group(function(){
+        Route::get('/',[DashboardController::class,'index']);
+        Route::get('/today',[DashboardController::class,'getTodaySchedules']);
+    });
 
     Route::prefix('subject')->group(function () {
 
@@ -68,6 +73,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
         Route::post('/update', [SubjectController::class, 'update']);
         Route::post('/destroy', [SubjectController::class, 'destroy']);
         Route::get('search/', [SubjectController::class, 'search']);
+     
     });
 
 
@@ -93,12 +99,12 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'isAdmin'])->group(function 
 
     Route::prefix('teacher')->group(function () {
         Route::get('/', [TeacherController::class, 'index']);
-
+        Route::post('archive/{id}',[TeacherController::class,'getArchive']);
         Route::prefix('pending')->group(function () {
             Route::get('/', [TeacherController::class, 'pending']);
             Route::post('/accept/{id}', [TeacherController::class, 'accept']);
             Route::post('/reject/{id}', [TeacherController::class, 'reject']);
-
+         
         });
 
 

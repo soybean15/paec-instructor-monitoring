@@ -51,6 +51,15 @@ class TeacherManager
 
     }
 
+    public function getArchive($id,$school_year,$semester){
+        $user = User::find($id);
+
+        return response()->json([
+            'subjects'=>$user->teacher->getArchiveSubjects($school_year,$semester)->get()
+        ]);
+
+    }
+
     public function store($data)
     {
         Validator::make($data, [

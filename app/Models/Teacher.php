@@ -45,6 +45,12 @@ class Teacher extends Model
         return $this->subjects()->currentSubject()->get();
     }
 
+    public function getArchiveSubjects($school_year,$semester){
+
+        //return response()->json(['year'=>$school_year,'sem'=>$semester]);
+        return $this ->subjects()->archiveSubjects($school_year,$semester);
+    }
+
     // public function availableSubjects(){
     //     $teacherSubjects = $this->subjects->pluck('subject_id');
     //     $subjects = Subject::whereDoesntHave('teacherSubjects', function ($query) use ($teacherSubjects) {

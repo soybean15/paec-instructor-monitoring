@@ -95,6 +95,10 @@ class TeacherController extends Controller
 
     }
 
+    public function getArchive(String $id,Request $request){
+        return $this->manager->getArchive($id,$request['school_year'],$request['semester']);
+    }
+
     
 
 

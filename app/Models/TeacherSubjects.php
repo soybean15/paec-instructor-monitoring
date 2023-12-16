@@ -42,6 +42,12 @@ class TeacherSubjects extends Model
 
     }
 
+    public function scopeArchiveSubjects(Builder $query, $school_year, $semester)
+    {
+        $query->where('school_year', $school_year)
+            ->where('semester', $semester);
+    }
+    
     public function schedules(){
         return $this->hasMany(Schedule::class, 'teacher_subject_id');
     }

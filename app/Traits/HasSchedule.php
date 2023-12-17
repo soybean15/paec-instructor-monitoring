@@ -88,7 +88,7 @@ trait HasSchedule
         }
     }
 
-    public  function getSchedules(){
+    public  function getSchedules($school_year){
 
         $agendas = [];
        TeacherSubjects::where('semester', $this->currentSemester())
